@@ -7,3 +7,5 @@ right:	to go right
 down:	to split
 up:	to jump
 
+Lua 5.3.2 and löve 2d required, place all the file in a directory and use the command "love directory_name"
+
