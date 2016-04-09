@@ -41,6 +41,7 @@ function love.load()
 	Floor1 = love.graphics.newImage("assets/Stuff/Floor1.png")
 	Floor2 = love.graphics.newImage("assets/Stuff/Floor2.png")
 	laser = love.graphics.newImage("assets/Stuff/laser.png")
+	laser2 = love.graphics.newImage("assets/Stuff/laser2.png")
 	laser4 = love.graphics.newImage("assets/Stuff/laser4.png")
 	lava1 = love.graphics.newImage("assets/Stuff/lava1.png")
 	lava2 = love.graphics.newImage("assets/Stuff/lava2.png")
@@ -82,10 +83,15 @@ function love.load()
 				x = math.random(-500, 2000),
 				y = -250,
 				dx = 10 * math.random() - 5,
-				dy = 5 * math.random() + 0.1}
+				dy = 4 * math.random() + 1}
 	end
 	for i = 305, 605 do
 		Obj[i] = {	item = laser4,
+				x = 0,
+				y = 0}
+	end
+	for i = 606, 906 do
+		Obj[i] = {	item = laser2,
 				x = 0,
 				y = 0}
 	end
@@ -155,9 +161,15 @@ function love.update(dt)
 			end
 
 			for i = 305, 605 do
-				if lasa == 3 then
+				if lasa == 3 or lasa == 7 then
 					Obj[i].x = Obj[i - 301].x + 1
 					Obj[i].y = Obj[i - 301].y + 1
+				end
+			end
+			for i = 606, 906 do
+				if lasa == 3 then
+					Obj[i].x = Obj[i - 301].x + 4
+					Obj[i].y = Obj[i - 301].y + 4
 				end
 			end
 
@@ -273,6 +285,12 @@ function love.update(dt)
 				end
 			elseif U.split == 1 then
 				U.Udx = U.Udx - U.Udx/33
+				if Obj[1].x > 573 or Obj[1].x < -1132 then
+					U.air = 1
+					U.Udy = 10
+					U.fall = 1
+					U.jetPack = 0
+				end
 			else
 				woosh:play()
 				if (not love.keyboard.isDown("up") or U.jetPack == 0) and U.air == 1 then
@@ -283,7 +301,7 @@ function love.update(dt)
 			end
 
 			-- animation
-			if lasa < 4 then
+			if lasa < 8 then
 				lasa = lasa + 1
 			else
 				lasa = 0
@@ -434,6 +452,11 @@ function love.draw()
 			end
 			for i = 305, 605 do
 				Obj[i] = {	item = laser4,
+						x = 0,
+						y = 0}
+			end
+			for i = 606, 906 do
+				Obj[i] = {	item = laser2,
 						x = 0,
 						y = 0}
 			end
