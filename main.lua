@@ -98,7 +98,7 @@ function love.load()
 	lasa = 0
 
 	lava = lava1
-	lavay = -700
+	lavay = -680
 	lavax = -2000
 	lavaa = 0
 		-- Backgrounds
@@ -137,7 +137,7 @@ function love.update(dt)
 			genos:play()
 
 			-- game over
-			if Obj[1].y < -500 then
+			if Obj[1].y < -400 then
 				scream:play()
 				U.dead = 1
 			end
@@ -327,7 +327,7 @@ function love.update(dt)
 			if U.animJump > 24 then
 				U.animJump = 0
 			end
-			if U.animStand > 30 then
+			if U.animStand > 27 then
 				U.animStand = 0
 			end
 
@@ -398,6 +398,66 @@ function love.update(dt)
 		else
 			genos:stop()
 			sad:play()
+			if love.keyboard.isDown("return") then -- restarts the game
+				-- variables
+					-- Uldarin
+				U = {	sprite = UsR,
+					Ux = 548,
+					Uy = 340,
+					CD = 0,		-- cooldown jump
+					Udx = 0,	-- x acceleration
+					Udy = 0,	-- y acceleration
+					air = 0,	-- is in air ?
+					jetPack = 20,	-- going up
+					animWalk = 0,	-- walking animation
+					animJump = 0,	-- jumping animation
+					animStand = 0,	-- standing animation
+					dead = 0,	-- are u dead ?
+					split = 0,	-- split or not ?
+					lastD = 'r'}	-- last direction pressed
+					-- Objects
+				Obj = {}
+				Obj[1] = {	item = Floor1,
+						x = -280,
+						y = -50}
+				Obj[2] = {	item = greyBox,
+						x = 800,
+						y = 300}
+				Obj[3] = {	item = greyBox,
+						x = 1200,
+						y = 300}
+				for i = 4, 304 do
+					Obj[i] = {	item = laser,
+							x = math.random(-500, 2000),
+							y = -250,
+							dx = 10 * math.random() - 5,
+							dy = 5 * math.random() + 0.1}
+				end
+				for i = 305, 605 do
+					Obj[i] = {	item = laser4,
+							x = 0,
+							y = 0}
+				end
+				for i = 606, 906 do
+					Obj[i] = {	item = laser2,
+							x = 0,
+							y = 0}
+				end
+				lasa = 0
+
+				lava = lava1
+				lavay = -700
+				lavax = -2000
+				lavaa = 0
+					-- Backgrounds
+					-- Miscellaneous
+				setPoint = 0 -- Space spotting
+				start = 0
+				difficulty = 0
+				level = 0
+				score = 0
+				sad:stop()
+			end
 		end
 	end
 end
@@ -415,66 +475,6 @@ function love.draw()
 		love.graphics.print("Score:", 0, 0, 0, 1, 1)
 		love.graphics.print(score, 50, 0, 0, 1, 1)
 	else
-		if love.keyboard.isDown("return") then -- restarts the game
-			-- variables
-				-- Uldarin
-			U = {	sprite = UsR,
-				Ux = 548,
-				Uy = 340,
-				CD = 0,		-- cooldown jump
-				Udx = 0,	-- x acceleration
-				Udy = 0,	-- y acceleration
-				air = 0,	-- is in air ?
-				jetPack = 20,	-- going up
-				animWalk = 0,	-- walking animation
-				animJump = 0,	-- jumping animation
-				animStand = 0,	-- standing animation
-				dead = 0,	-- are u dead ?
-				split = 0,	-- split or not ?
-				lastD = 'r'}	-- last direction pressed
-				-- Objects
-			Obj = {}
-			Obj[1] = {	item = Floor1,
-					x = -280,
-					y = -50}
-			Obj[2] = {	item = greyBox,
-					x = 800,
-					y = 300}
-			Obj[3] = {	item = greyBox,
-					x = 1200,
-					y = 300}
-			for i = 4, 304 do
-				Obj[i] = {	item = laser,
-						x = math.random(-500, 2000),
-						y = -250,
-						dx = 10 * math.random() - 5,
-						dy = 5 * math.random() + 0.1}
-			end
-			for i = 305, 605 do
-				Obj[i] = {	item = laser4,
-						x = 0,
-						y = 0}
-			end
-			for i = 606, 906 do
-				Obj[i] = {	item = laser2,
-						x = 0,
-						y = 0}
-			end
-			lasa = 0
-
-			lava = lava1
-			lavay = -700
-			lavax = -2000
-			lavaa = 0
-				-- Backgrounds
-				-- Miscellaneous
-			setPoint = 0 -- Space spotting
-			start = 0
-			difficulty = 0
-			level = 0
-			score = 0
-			sad:stop()
-		end
 		love.graphics.draw(GO, 0, 0)
 		love.graphics.print("Score:", 500, 500, 0, 3, 3)
 		love.graphics.print(score, 700, 500, 0, 3, 3)
