@@ -83,7 +83,7 @@ function love.load()
 				x = math.random(-500, 2000),
 				y = -250,
 				dx = 10 * math.random() - 5,
-				dy = 4 * math.random() + 1}
+				dy = 3.5 * math.random() + 1.5}
 	end
 	for i = 305, 605 do
 		Obj[i] = {	item = laser4,
