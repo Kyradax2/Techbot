@@ -49,7 +49,9 @@ function love.load()
 		-- Backgrounds
 	GO = love.graphics.newImage("assets/BG/gameOver.png")
 	Start = love.graphics.newImage("assets/BG/Start.png")
-
+	BG1 = love.graphics.newImage("assets/BG/BG1.png")
+	BG2 = love.graphics.newImage("assets/BG/BG2.png")
+	BG3 = love.graphics.newImage("assets/BG/BG3.png")
 
 	-- variables
 		-- Uldarin
@@ -102,6 +104,10 @@ function love.load()
 	lavax = -2000
 	lavaa = 0
 		-- Backgrounds
+	BG = BG1
+	BGy = -100
+	BGx = -560
+	BGa = 0
 		-- Miscellaneous
 	setPoint = 0 -- Space spotting
 	start = 0
@@ -197,6 +203,8 @@ function love.update(dt)
 					end
 				end
 			end
+			BGx = BGx - 0.2*U.Udx
+			BGy = BGy - 0.2*U.Udy
 
 			-- physics 2
 			if difficulty < 1000 then
@@ -321,6 +329,20 @@ function love.update(dt)
 			else
 				lavaa = lavaa + 1
 			end
+
+			if BGa > 13 then
+				BGa = 0
+				BG = BG3
+			elseif BGa > 10 then
+				BGa = BGa + 1
+				BG = BG2
+			elseif BGa > 6 then
+				BGa = BGa + 1
+				BG = BG1
+			else
+				BGa = BGa + 1
+			end
+
 			if U.animWalk > 30 then
 				U.animWalk = 0
 			end
@@ -467,6 +489,7 @@ function love.draw()
 		love.graphics.draw(Start, 0, 0)
 	-- drawing
 	elseif U.dead == 0 then
+		love.graphics.draw(BG, BGx, BGy)
 		for i in pairs(Obj) do
 			love.graphics.draw(Obj[i].item, Obj[i].x, Obj[i].y)
 		end
