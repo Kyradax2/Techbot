@@ -472,6 +472,10 @@ function love.update(dt)
 				lavax = -2000
 				lavaa = 0
 					-- Backgrounds
+				BG = BG1
+				BGy = -100
+				BGx = -560
+				BGa = 0
 					-- Miscellaneous
 				setPoint = 0 -- Space spotting
 				start = 0
