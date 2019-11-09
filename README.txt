@@ -7,5 +7,5 @@ right:	to go right
 down:	to split
 up:	to jump
 
-Lua 5.3.2 and löve 2d required, place all the file in a directory and use the command "love directory_name"
+Lua 5.3.2 and löve10 2d required, place all the file in a directory and use the command "love directory_name" or "love10 directory_name" if love has been updated since the creation of the game.
 
